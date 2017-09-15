@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <!--*-->
+    <id>$id$</id>
+    <!--*-->
+    <version>1.0.0.0</version>
+    <title>
+    </title>
+    <!--*-->
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/guigomesa/NuvemShop4.net/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/guigomesa/NuvemShop4.net</projectUrl>
+    <!--
+    <iconUrl></iconUrl>
+-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!--*-->
+    <description>$description$</description>
+    <!--*-->
+    <releaseNotes>First&amp;#x0020;Release</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>
+    </tags>
+    <dependencies>
+   <group targetFramework="net452">
+      <dependency id="Newtonsoft.Json" version="10.0.3" />
+      <dependency id="RestSharp" version="105.2.3" />
+   </group>
+</dependencies>
+  </metadata>
+</package>

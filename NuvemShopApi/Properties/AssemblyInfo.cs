@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NuvemShopApi")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("NuvemShop4.net")]
+[assembly: AssemblyDescription("Client for NuvemShop/TiendNube API")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NuvemShopApi")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCompany("Guigomesa")]
+[assembly: AssemblyProduct("NuvemShop4.net")]
+[assembly: AssemblyCopyright("MIT")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -74,6 +75,12 @@ namespace NuvemShopApi
                 request = AddRequiredParameters(request);
 
                 response = BuildClientRest().Execute(request);
+
+                if (response.StatusCode != HttpStatusCode.OK || response.StatusCode != HttpStatusCode.Created ||
+                    response.StatusCode != HttpStatusCode.Accepted)
+                {
+                    throw new Exception("Error in request see inner exception");
+                }
 
                 return JsonConvert.DeserializeObject<T>(response.Content);
             }
