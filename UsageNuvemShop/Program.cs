@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NuvemShopApi;
+using RestSharp;
 using RestSharp.Extensions;
 
 namespace UsageNuvemShop
@@ -26,10 +27,35 @@ namespace UsageNuvemShop
                 Console.WriteLine("= = = = = = = = = = = = = = = = = ");
                 if (r.variants is IEnumerable)
                 {
+                    
+
                     foreach (var variant in r.variants)
                     {
-                        if (variant.sku == null && variant.stock == null) continue;
-                        Console.WriteLine($"SKU: {variant.sku} - Stock: {variant.stock}");
+                        try
+                        {
+                            var urlPutVariant = $"/products/{r.id}/variants/{variant.id}";
+
+                            variant.stock = 42;
+
+                            var parameters = new List<RestSharp.Parameter>
+                            {
+                                new Parameter
+                                {
+                                    Name = "application/json",
+                                    Type = ParameterType.RequestBody,
+                                    Value = variant
+                                }
+                            };
+                            var clientPut = new ClientNuvemShop("guigomesa@outlook.com", "Test NuvemShop", GetFullCredentials());
+                            var retornPutVariant = clientPut.PutData<dynamic>(urlPutVariant, parameters.ToArray());
+                            Console.WriteLine($"Variacao sku {variant.sku} foi alterada para estoque {variant.stock}");
+                        }
+                        catch (NuvemShopApi.ApiNuvemShopException ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+
+
                     }
                 }
             }

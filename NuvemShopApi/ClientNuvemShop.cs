@@ -61,6 +61,10 @@ namespace NuvemShopApi
             {
                 request = new RestRequest(resource, method);
 
+                request.Parameters.Clear();
+
+                
+
                 foreach (var p in anotherParameters)
                 {
                     request.AddParameter(p);
