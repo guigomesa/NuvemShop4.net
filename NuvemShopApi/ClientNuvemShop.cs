@@ -16,14 +16,17 @@ namespace NuvemShopApi
 
         public string UserAgent { get; set; }
         public string Email { get; set; }
-        public CredentialsNuvemShop Credentials { get; private set; }
+        public ICredentialsNuvemShop Credentials { get; private set; }
 
         public const string ResourceUrlAuthorize = "apps/authorize/token";
         public const string ResourceDomainAuthorize = "https://www.tiendanube.com";
 
+        public int LimitRequests { get; private set; }
+        public int LimitRemaining { get; private set; }
+        public int LimitReset { get; private set; }
+        
 
-
-        public ClientNuvemShop(string email, string userAgent, CredentialsNuvemShop credentials)
+        public ClientNuvemShop(string email, string userAgent, ICredentialsNuvemShop credentials)
         {
             Email = email;
             UserAgent = userAgent;
@@ -64,8 +67,6 @@ namespace NuvemShopApi
 
                 request.Parameters.Clear();
 
-                
-
                 foreach (var p in anotherParameters)
                 {
                     request.AddParameter(p);
@@ -76,8 +77,10 @@ namespace NuvemShopApi
 
                 response = BuildClientRest().Execute(request);
 
-                if (response.StatusCode != HttpStatusCode.OK || response.StatusCode != HttpStatusCode.Created ||
-                    response.StatusCode != HttpStatusCode.Accepted)
+                UpdateLimitRequests(response);
+
+                if (!(response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created ||
+                    response.StatusCode == HttpStatusCode.Accepted))
                 {
                     throw new Exception("Error in request see inner exception");
                 }
@@ -86,10 +89,9 @@ namespace NuvemShopApi
             }
             catch (Exception e)
             {
+                UpdateLimitRequests(response);
                 throw new ApiNuvemShopException(request,response, "An error occurred while attempting the request",e);
             }
-
-            
         }
         public T GetData<T>(string resource, params Parameter[] anotherParameters) => RunRequest<T>(resource, Method.GET,anotherParameters);
         public T PutData<T>(string resource, params Parameter[] anotherParameters) => RunRequest<T>(resource, Method.PUT, anotherParameters);
@@ -97,6 +99,13 @@ namespace NuvemShopApi
         public T HeadData<T>(string resource, params Parameter[] anotherParameters) => RunRequest<T>(resource, Method.HEAD, anotherParameters);
         public T DeleteData<T>(string resource, params Parameter[] anotherParameters) => RunRequest<T>(resource, Method.DELETE, anotherParameters);
 
+
+        private void UpdateLimitRequests(IRestResponse response)
+        {
+            LimitRequests = int.Parse(response.Headers.FirstOrDefault(r => r.Name.Equals("X-Rate-Limit-Limit"))?.Value.ToString()?? "-1");
+            LimitRemaining = int.Parse(response.Headers.FirstOrDefault(r => r.Name.Equals("X-Rate-Limit-Remaining"))?.Value.ToString()?? "-1");
+            LimitReset = int.Parse(response.Headers.FirstOrDefault(r => r.Name.Equals("X-Rate-Limit-Reset"))?.Value.ToString()?? "-1");
+        }
 
 
         /// <summary>

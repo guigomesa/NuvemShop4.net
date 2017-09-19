@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace NuvemShopApi
 {
-    public class CredentialsNuvemShop
+    public interface ICredentialsNuvemShop
+    {
+        string AppId { get; set; }
+        string AccessToken { get; set; }
+        string StoreId { get; set; }
+        string AppSecret { get; set; }
+        string ToString();
+    }
+
+    public class CredentialsNuvemShop : ICredentialsNuvemShop
     {
         public string AppId { get; set; }
         public string AccessToken { get; set; }
