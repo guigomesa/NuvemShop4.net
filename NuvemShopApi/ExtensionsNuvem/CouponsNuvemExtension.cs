@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace NuvemShopApi.ExtensionsNuvem
@@ -35,7 +36,7 @@ namespace NuvemShopApi.ExtensionsNuvem
             {
                 Name = "application/json",
                 Type = ParameterType.RequestBody,
-                Value = model,
+                Value = JsonConvert.SerializeObject(model),
                 ContentType = "application/json"
             };
             return apiClient.PostData<T>($"{BaseResourceCoupom}", parameter);
@@ -47,10 +48,15 @@ namespace NuvemShopApi.ExtensionsNuvem
             {
                 Name = "application/json",
                 Type = ParameterType.RequestBody,
-                Value = model,
+                Value = JsonConvert.SerializeObject(model),
                 ContentType = "application/json"
             };
-            return apiClient.PostData<T>($"{BaseResourceCoupom}/{id}",parameter);
+            return apiClient.PutData<T>($"{BaseResourceCoupom}/{id}",parameter);
+        }
+
+        public static T DeleteCoupom<T>(this ClientNuvemShop apiClient, long id)
+        {
+            return apiClient.DeleteData<T>($"{BaseResourceCoupom}/{id}/");
         }
     }
 }

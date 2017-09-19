@@ -8,19 +8,18 @@ using RestSharp;
 
 namespace NuvemShopApi.ExtensionsNuvem
 {
-    public static class ProductsNuvemExtension
+    public static class CustomersNuvemExtension
     {
-        private const string BaseResourceProducts = "/products";
+        private const string BaseResourceProducts = "/customers";
 
         /// <summary>
-        /// Retry products from API
-        /// <para>Consult documentation to get parameters to filter request <see cref="https://github.com/TiendaNube/api-docs/blob/master/resources/product.md#get-products"/> </para>
+        /// Get all customers
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
         /// <param name="urlParams"></param>
         /// <returns></returns>
-        public static T GetProducts<T>(this ClientNuvemShop apiClient, params Tuple<string,string>[] urlParams)
+        public static T GetCustomers<T>(this ClientNuvemShop apiClient, params Tuple<string, string>[] urlParams)
         {
             var builder = new StringBuilder();
 
@@ -32,32 +31,25 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// Get a product based on ID
+        /// Get specify customer
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
         /// <param name="id"></param>
-        /// <param name="urlParams"></param>
         /// <returns></returns>
-        public static T GetProduct<T>(this ClientNuvemShop apiClient, long id,params Tuple<string, string>[] urlParams)
+        public static T GetCustomers<T>(this ClientNuvemShop apiClient, long id)
         {
-            var builder = new StringBuilder();
-
-            foreach (var p in urlParams)
-            {
-                builder.Append($"{p.Item1}={p.Item2}&");
-            }
-            return apiClient.GetData<T>($"{BaseResourceProducts}/{id}/?{builder}");
+            return apiClient.GetData<T>($"{BaseResourceProducts}/{id}");
         }
-        
+
         /// <summary>
-        /// Create a new product
+        /// Create a new customer
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static T CreateProduct<T>(this ClientNuvemShop apiClient, object model)
+        public static T CreateCustomers<T>(this ClientNuvemShop apiClient, object model)
         {
             var parameter = new Parameter
             {
@@ -71,34 +63,34 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// Update data on product
+        /// Update data in customer
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
         /// <param name="model"></param>
-        /// <param name="id"></param>
+        /// /// <param name="id"></param>
         /// <returns></returns>
-        public static T UpdateProduct<T>(this ClientNuvemShop apiClient, object model, long id)
+        public static T UpdateCustomers<T>(this ClientNuvemShop apiClient, long id,object model)
         {
-           var parameter = new Parameter
+            var parameter = new Parameter
             {
                 Name = "application/json",
                 Type = ParameterType.RequestBody,
-               Value = JsonConvert.SerializeObject(model),
-               ContentType = "application/json"
-           };
+                Value = JsonConvert.SerializeObject(model),
+                ContentType = "application/json"
+            };
 
-            return apiClient.PutData<T>($"{BaseResourceProducts}/{id}/",parameter);
+            return apiClient.PutData<T>($"{BaseResourceProducts}/{id}", parameter);
         }
 
         /// <summary>
-        /// Remove a product
+        /// Delete a customer
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static T DeleteProduct<T>(this ClientNuvemShop apiClient, long id)
+        public static T DeleteCustomer<T>(this ClientNuvemShop apiClient, long id)
         {
             return apiClient.DeleteData<T>($"{BaseResourceProducts}/{id}/");
         }
