@@ -18,7 +18,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         /// <param name="apiClient"></param>
         /// <param name="urlParams"></param>
         /// <returns></returns>
-        public static T GetProducts<T>(this ClientNuvemShop apiClient, params Tuple<string,string>[] urlParams )
+        public static T GetProducts<T>(this ClientNuvemShop apiClient, params Tuple<string,string>[] urlParams)
         {
             var builder = new StringBuilder();
 
