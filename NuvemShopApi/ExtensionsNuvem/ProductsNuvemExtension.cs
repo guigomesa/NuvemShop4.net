@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RestSharp;
 
 namespace NuvemShopApi.ExtensionsNuvem
 {
@@ -54,17 +55,18 @@ namespace NuvemShopApi.ExtensionsNuvem
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
         /// <param name="model"></param>
-        /// <param name="urlParams"></param>
         /// <returns></returns>
-        public static T CreateProduct<T>(this ClientNuvemShop apiClient, object model, params Tuple<string, string>[] urlParams)
+        public static T CreateProduct<T>(this ClientNuvemShop apiClient, object model)
         {
-            var builder = new StringBuilder();
-
-            foreach (var p in urlParams)
+            var parameter = new Parameter
             {
-                builder.Append($"{p.Item1}={p.Item2}&");
-            }
-            return apiClient.PostData<T>($"{BaseResourceProducts}?{builder}");
+                Name = "application/json",
+                Type = ParameterType.RequestBody,
+                Value = model,
+                ContentType = "application/json"
+            };
+
+            return apiClient.PostData<T>($"{BaseResourceProducts}", parameter);
         }
 
         /// <summary>
@@ -74,17 +76,18 @@ namespace NuvemShopApi.ExtensionsNuvem
         /// <param name="apiClient"></param>
         /// <param name="model"></param>
         /// <param name="id"></param>
-        /// <param name="urlParams"></param>
         /// <returns></returns>
-        public static T UpdateProduct<T>(this ClientNuvemShop apiClient, object model, long id,params Tuple<string, string>[] urlParams)
+        public static T UpdateProduct<T>(this ClientNuvemShop apiClient, object model, long id)
         {
-            var builder = new StringBuilder();
-
-            foreach (var p in urlParams)
+           var parameter = new Parameter
             {
-                builder.Append($"{p.Item1}={p.Item2}&");
-            }
-            return apiClient.PutData<T>($"{BaseResourceProducts}/{id}/?{builder}");
+                Name = "application/json",
+                Type = ParameterType.RequestBody,
+                Value = model,
+                ContentType = "application/json"
+           };
+
+            return apiClient.PutData<T>($"{BaseResourceProducts}/{id}/",parameter);
         }
 
         /// <summary>
