@@ -49,6 +49,7 @@
     <Compile Include="ApiNuvemShopException.cs" />
     <Compile Include="ClientNuvemShop.cs" />
     <Compile Include="CredentialsNuvemShop.cs" />
+    <Compile Include="ExtensionsNuvem\ProductsNuvemExtension.cs" />
     <Compile Include="JsonModels\AuthorizationJson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
