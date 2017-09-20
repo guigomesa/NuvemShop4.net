@@ -10,7 +10,7 @@ namespace NuvemShopApi.ExtensionsNuvem
 {
     public static class ProductsNuvemExtension
     {
-        private const string BaseResourceProducts = "/products";
+        public const string BaseResourceProducts = "/products";
 
         /// <summary>
         /// Retry products from API

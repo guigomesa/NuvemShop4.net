@@ -8,18 +8,19 @@ using RestSharp;
 
 namespace NuvemShopApi.ExtensionsNuvem
 {
-    public static class CustomersNuvemExtension
+    public static class ProductImage
     {
-        public const string BaseResourceProducts = "/customers";
+        public const string BaseResourceProductImage = "/products/{0}/images";
 
         /// <summary>
-        /// Get all customers
+        /// Get all imagem for a product
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
+        /// <param name="idProduct"></param>
         /// <param name="urlParams"></param>
         /// <returns></returns>
-        public static T GetCustomers<T>(this ClientNuvemShop apiClient, params Tuple<string, string>[] urlParams)
+        public static T GetImages<T>(this ClientNuvemShop apiClient, long idProduct, params Tuple<string, string>[] urlParams)
         {
             var builder = new StringBuilder();
 
@@ -27,29 +28,31 @@ namespace NuvemShopApi.ExtensionsNuvem
             {
                 builder.Append($"{p.Item1}={p.Item2}&");
             }
-            return apiClient.GetData<T>($"{BaseResourceProducts}?{builder}");
+            return apiClient.GetData<T>($"{String.Format(BaseResourceProductImage, idProduct)}?{builder}");
         }
 
         /// <summary>
-        /// Get specify customer
+        /// Get a specify image for a product
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
-        /// <param name="id"></param>
+        /// <param name="idProduct"></param>
+        /// <param name="idImage"></param>
         /// <returns></returns>
-        public static T GetCustomers<T>(this ClientNuvemShop apiClient, long id)
+        public static T GetImage<T>(this ClientNuvemShop apiClient, long idProduct, long idImage)
         {
-            return apiClient.GetData<T>($"{BaseResourceProducts}/{id}");
+            return apiClient.GetData<T>($"{String.Format(BaseResourceProductImage, idProduct)}/{idImage}");
         }
 
         /// <summary>
-        /// Create a new customer
+        /// Create an image
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
+        /// <param name="idProduct"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static T CreateCustomers<T>(this ClientNuvemShop apiClient, object model)
+        public static T CreateImage<T>(this ClientNuvemShop apiClient, long idProduct, object model)
         {
             var parameter = new Parameter
             {
@@ -58,19 +61,18 @@ namespace NuvemShopApi.ExtensionsNuvem
                 Value = JsonConvert.SerializeObject(model),
                 ContentType = "application/json"
             };
-
-            return apiClient.PostData<T>($"{BaseResourceProducts}", parameter);
+            return apiClient.PostData<T>($"{String.Format(BaseResourceProductImage, idProduct)}",parameter);
         }
 
         /// <summary>
-        /// Update data in customer
+        /// Update/Change an image for a product
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
+        /// <param name="idProduct"></param>
         /// <param name="model"></param>
-        /// /// <param name="id"></param>
         /// <returns></returns>
-        public static T UpdateCustomers<T>(this ClientNuvemShop apiClient, long id,object model)
+        public static T UpdateImage<T>(this ClientNuvemShop apiClient, long idProduct, object model)
         {
             var parameter = new Parameter
             {
@@ -79,20 +81,20 @@ namespace NuvemShopApi.ExtensionsNuvem
                 Value = JsonConvert.SerializeObject(model),
                 ContentType = "application/json"
             };
-
-            return apiClient.PutData<T>($"{BaseResourceProducts}/{id}", parameter);
+            return apiClient.PutData<T>($"{String.Format(BaseResourceProductImage, idProduct)}", parameter);
         }
 
         /// <summary>
-        /// Delete a customer
+        /// Delete an image for a specify product
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
-        /// <param name="id"></param>
+        /// <param name="idProduct"></param>
+        /// <param name="idImage"></param>
         /// <returns></returns>
-        public static T DeleteCustomer<T>(this ClientNuvemShop apiClient, long id)
+        public static T DeleteProduct<T>(this ClientNuvemShop apiClient, long idProduct, long idImage)
         {
-            return apiClient.DeleteData<T>($"{BaseResourceProducts}/{id}/");
+            return apiClient.DeleteData<T>($"{String.Format(BaseResourceProductImage, idProduct)}/{idProduct}");
         }
     }
 }

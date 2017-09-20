@@ -10,7 +10,7 @@ namespace NuvemShopApi.ExtensionsNuvem
 {
     public static class OrderNuvemExtension
     {
-        private const string BaseResourceOrder = "/coupons";
+        public const string BaseResourceOrder = "/coupons";
 
         /// <summary>
         /// Get orders

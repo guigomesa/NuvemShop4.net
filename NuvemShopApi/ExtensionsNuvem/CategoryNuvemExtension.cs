@@ -10,7 +10,7 @@ namespace NuvemShopApi.ExtensionsNuvem
 {
     public static class CategoryNuvemExtension
     {
-        private const string BaseResourceCategory = "/categories";
+        public const string BaseResourceCategory = "/categories";
 
         /// <summary>
         /// Get all categories

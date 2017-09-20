@@ -10,7 +10,7 @@ namespace NuvemShopApi.ExtensionsNuvem
 {
     public static class CouponsNuvemExtension
     {
-        private const string BaseResourceCoupom = "/coupons";
+        public const string BaseResourceCoupom = "/coupons";
 
         /// <summary>
         /// Get cupons
