@@ -57,6 +57,7 @@
     <Compile Include="ExtensionsNuvem\ProductsNuvemExtension.cs" />
     <Compile Include="ExtensionsNuvem\ProductVariantNuvemExtension.cs" />
     <Compile Include="ExtensionsNuvem\StoreNuvemExtension.cs" />
+    <Compile Include="ExtensionsNuvem\WebhookNuvemExtension.cs" />
     <Compile Include="JsonModels\AuthorizationJson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
