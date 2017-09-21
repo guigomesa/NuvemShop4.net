@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -13,7 +10,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         public const string BaseResourceOrder = "/coupons";
 
         /// <summary>
-        /// Get orders
+        ///     Get orders
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -25,7 +22,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// Get specify order
+        ///     Get specify order
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -36,15 +33,13 @@ namespace NuvemShopApi.ExtensionsNuvem
             var builder = new StringBuilder();
 
             foreach (var p in urlParams)
-            {
                 builder.Append($"{p.Item1}={p.Item2}&");
-            }
 
             return apiClient.GetData<T>($"{BaseResourceOrder}?fields={builder}");
         }
 
         /// <summary>
-        /// Create a new order
+        ///     Create a new order
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -63,7 +58,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// Update an order
+        ///     Update an order
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -83,7 +78,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// ReOpen an order
+        ///     ReOpen an order
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -95,7 +90,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// Close an order
+        ///     Close an order
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -107,7 +102,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// Cancel an order
+        ///     Cancel an order
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -119,7 +114,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// Fullfill order
+        ///     Fullfill order
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -137,7 +132,5 @@ namespace NuvemShopApi.ExtensionsNuvem
             };
             return apiClient.PostData<T>($"{BaseResourceOrder}/{id}/fulfill", parameter);
         }
-
-
     }
 }

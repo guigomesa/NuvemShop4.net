@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -13,7 +10,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         public const string BaseResourceCoupom = "/coupons";
 
         /// <summary>
-        /// Get cupons
+        ///     Get cupons
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -25,7 +22,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// Get an specify cupom
+        ///     Get an specify cupom
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -36,14 +33,13 @@ namespace NuvemShopApi.ExtensionsNuvem
             var builder = new StringBuilder();
 
             foreach (var p in urlParams)
-            {
                 builder.Append($"{p.Item1}={p.Item2}&");
-            }
 
             return apiClient.GetData<T>($"{BaseResourceCoupom}?fields={builder}");
         }
+
         /// <summary>
-        /// Create a new coupom
+        ///     Create a new coupom
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -60,8 +56,9 @@ namespace NuvemShopApi.ExtensionsNuvem
             };
             return apiClient.PostData<T>($"{BaseResourceCoupom}", parameter);
         }
+
         /// <summary>
-        /// Update an coupon
+        ///     Update an coupon
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -79,8 +76,9 @@ namespace NuvemShopApi.ExtensionsNuvem
             };
             return apiClient.PutData<T>($"{BaseResourceCoupom}/{id}", parameter);
         }
+
         /// <summary>
-        /// Delete an coupom
+        ///     Delete an coupom
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>

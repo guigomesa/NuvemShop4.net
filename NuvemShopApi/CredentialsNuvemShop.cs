@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NuvemShopApi
+﻿namespace NuvemShopApi
 {
     public interface ICredentialsNuvemShop
     {
@@ -17,24 +11,26 @@ namespace NuvemShopApi
 
     public class CredentialsNuvemShop : ICredentialsNuvemShop
     {
-        public string AppId { get; set; }
-        public string AccessToken { get; set; }
-        public string StoreId { get; set; }
-        public string AppSecret { get; set; }
-        
-
-        public CredentialsNuvemShop(string storeId, String accessToken)
+        public CredentialsNuvemShop(string storeId, string accessToken)
         {
-            this.StoreId = storeId;
-            this.AccessToken = accessToken;
+            StoreId = storeId;
+            AccessToken = accessToken;
         }
 
         public CredentialsNuvemShop(long storeId, string accessToken)
         {
-            this.StoreId = storeId.ToString();
-            this.AccessToken = accessToken;
+            StoreId = storeId.ToString();
+            AccessToken = accessToken;
         }
-        public CredentialsNuvemShop() { }
+
+        public CredentialsNuvemShop()
+        {
+        }
+
+        public string AppId { get; set; }
+        public string AccessToken { get; set; }
+        public string StoreId { get; set; }
+        public string AppSecret { get; set; }
 
         public override string ToString()
         {
@@ -45,7 +41,7 @@ namespace NuvemShopApi
         {
             var retorno = new CredentialsNuvemShop
             {
-                AppId =  appId,
+                AppId = appId,
                 AppSecret = appSecret
             };
             return retorno;

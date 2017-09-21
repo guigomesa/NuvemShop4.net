@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -13,7 +9,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         public const string BaseResourceCategory = "/categories";
 
         /// <summary>
-        /// Get all categories
+        ///     Get all categories
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -24,7 +20,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// Get a specify category based on id
+        ///     Get a specify category based on id
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -36,7 +32,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// Get specify fields of categories
+        ///     Get specify fields of categories
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -47,34 +43,30 @@ namespace NuvemShopApi.ExtensionsNuvem
             var builder = new StringBuilder();
 
             foreach (var p in fields)
-            {
                 builder.Append($"{p},");
-            }
 
             return apiClient.GetData<T>($"{BaseResourceCategory}?fields={builder}");
         }
 
         /// <summary>
-        /// Get specify fields of category
+        ///     Get specify fields of category
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
         /// <param name="fields"></param>
         /// <returns></returns>
-        public static T GetCategory<T>(this ClientNuvemShop apiClient, long id,params string[] fields)
+        public static T GetCategory<T>(this ClientNuvemShop apiClient, long id, params string[] fields)
         {
             var builder = new StringBuilder();
 
             foreach (var p in fields)
-            {
                 builder.Append($"{p},");
-            }
 
             return apiClient.GetData<T>($"{BaseResourceCategory}/{id}/?fields={builder}");
         }
 
         /// <summary>
-        /// Create a new category
+        ///     Create a new category
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -90,11 +82,11 @@ namespace NuvemShopApi.ExtensionsNuvem
                 ContentType = "application/json"
             };
 
-            return apiClient.PostData<T>($"{BaseResourceCategory}",parameter);
+            return apiClient.PostData<T>($"{BaseResourceCategory}", parameter);
         }
 
         /// <summary>
-        /// Update a category
+        ///     Update a category
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -110,11 +102,11 @@ namespace NuvemShopApi.ExtensionsNuvem
                 Value = JsonConvert.SerializeObject(model),
                 ContentType = "application/json"
             };
-            return apiClient.PostData<T>($"{BaseResourceCategory}/{id}/",parameter);
+            return apiClient.PostData<T>($"{BaseResourceCategory}/{id}/", parameter);
         }
 
         /// <summary>
-        /// Delete a category
+        ///     Delete a category
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>

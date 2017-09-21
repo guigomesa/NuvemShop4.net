@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -13,7 +10,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         public const string BaseResourceProducts = "/customers";
 
         /// <summary>
-        /// Get all customers
+        ///     Get all customers
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -24,14 +21,12 @@ namespace NuvemShopApi.ExtensionsNuvem
             var builder = new StringBuilder();
 
             foreach (var p in urlParams)
-            {
                 builder.Append($"{p.Item1}={p.Item2}&");
-            }
             return apiClient.GetData<T>($"{BaseResourceProducts}?{builder}");
         }
 
         /// <summary>
-        /// Get specify customer
+        ///     Get specify customer
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -43,7 +38,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// Create a new customer
+        ///     Create a new customer
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -63,14 +58,15 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// Update data in customer
+        ///     Update data in customer
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
         /// <param name="model"></param>
-        /// /// <param name="id"></param>
+        /// ///
+        /// <param name="id"></param>
         /// <returns></returns>
-        public static T UpdateCustomers<T>(this ClientNuvemShop apiClient, long id,object model)
+        public static T UpdateCustomers<T>(this ClientNuvemShop apiClient, long id, object model)
         {
             var parameter = new Parameter
             {
@@ -84,7 +80,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// Delete a customer
+        ///     Delete a customer
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>

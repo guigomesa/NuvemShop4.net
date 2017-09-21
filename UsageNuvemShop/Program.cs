@@ -1,20 +1,16 @@
 ﻿using System;
-using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NuvemShopApi;
 using RestSharp;
-using RestSharp.Extensions;
 
 namespace UsageNuvemShop
 {
-    class Program
+    internal class Program
     {
         private static IEnumerable<string> temp = new List<string>();
-        static void Main(string[] args)
+
+        private static void Main(string[] args)
         {
             var apiNuvem = new ClientNuvemShop("guigomesa@outlook.com", "Test NuvemShop", GetFullCredentials());
 
@@ -26,18 +22,14 @@ namespace UsageNuvemShop
                 //Console.WriteLine($"Description: {r.description.pt}");
                 Console.WriteLine("= = = = = = = = = = = = = = = = = ");
                 if (r.variants is IEnumerable)
-                {
-                    
-
                     foreach (var variant in r.variants)
-                    {
                         try
                         {
                             var urlPutVariant = $"/products/{r.id}/variants/{variant.id}";
 
                             variant.stock = 42;
 
-                            var parameters = new List<RestSharp.Parameter>
+                            var parameters = new List<Parameter>
                             {
                                 new Parameter
                                 {
@@ -46,18 +38,15 @@ namespace UsageNuvemShop
                                     Value = variant
                                 }
                             };
-                            var clientPut = new ClientNuvemShop("guigomesa@outlook.com", "Test NuvemShop", GetFullCredentials());
+                            var clientPut = new ClientNuvemShop("guigomesa@outlook.com", "Test NuvemShop",
+                                GetFullCredentials());
                             var retornPutVariant = clientPut.PutData<dynamic>(urlPutVariant, parameters.ToArray());
                             Console.WriteLine($"Variacao sku {variant.sku} foi alterada para estoque {variant.stock}");
                         }
-                        catch (NuvemShopApi.ApiNuvemShopException ex)
+                        catch (ApiNuvemShopException ex)
                         {
                             Console.WriteLine(ex.Message);
                         }
-
-
-                    }
-                }
             }
 
             Console.WriteLine("Consulta feita");

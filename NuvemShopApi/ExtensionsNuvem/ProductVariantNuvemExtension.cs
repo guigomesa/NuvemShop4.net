@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -13,26 +10,25 @@ namespace NuvemShopApi.ExtensionsNuvem
         public const string BaseResourceProductsVariant = "/products/{0}/variants";
 
         /// <summary>
-        /// Get products variants
+        ///     Get products variants
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
         /// <param name="idProduct"></param>
         /// <param name="urlParams"></param>
         /// <returns></returns>
-        public static T GetProductVariants<T>(this ClientNuvemShop apiClient, long idProduct, params Tuple<string, string>[] urlParams)
+        public static T GetProductVariants<T>(this ClientNuvemShop apiClient, long idProduct,
+            params Tuple<string, string>[] urlParams)
         {
             var builder = new StringBuilder();
 
             foreach (var p in urlParams)
-            {
                 builder.Append($"{p.Item1}={p.Item2}&");
-            }
-            return apiClient.GetData<T>($"{string.Format(BaseResourceProductsVariant,idProduct)}?{builder}");
+            return apiClient.GetData<T>($"{string.Format(BaseResourceProductsVariant, idProduct)}?{builder}");
         }
 
         /// <summary>
-        /// Get an specify product variant
+        ///     Get an specify product variant
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -45,7 +41,7 @@ namespace NuvemShopApi.ExtensionsNuvem
         }
 
         /// <summary>
-        /// Create a new product variant
+        ///     Create a new product variant
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -61,11 +57,11 @@ namespace NuvemShopApi.ExtensionsNuvem
                 Value = JsonConvert.SerializeObject(model),
                 ContentType = "application/json"
             };
-            return apiClient.PostData<T>($"{string.Format(BaseResourceProductsVariant, idProduct)}",parameter);
+            return apiClient.PostData<T>($"{string.Format(BaseResourceProductsVariant, idProduct)}", parameter);
         }
 
         /// <summary>
-        /// Update an product variant
+        ///     Update an product variant
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>
@@ -73,7 +69,8 @@ namespace NuvemShopApi.ExtensionsNuvem
         /// <param name="idVariant"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static T UpdateProductVariant<T>(this ClientNuvemShop apiClient, long idProduct,long idVariant ,object model)
+        public static T UpdateProductVariant<T>(this ClientNuvemShop apiClient, long idProduct, long idVariant,
+            object model)
         {
             var parameter = new Parameter
             {
@@ -82,11 +79,12 @@ namespace NuvemShopApi.ExtensionsNuvem
                 Value = JsonConvert.SerializeObject(model),
                 ContentType = "application/json"
             };
-            return apiClient.PutData<T>($"{string.Format(BaseResourceProductsVariant, idProduct)}/{idVariant}", parameter);
+            return apiClient.PutData<T>($"{string.Format(BaseResourceProductsVariant, idProduct)}/{idVariant}",
+                parameter);
         }
 
         /// <summary>
-        /// Delete an specify a product variant
+        ///     Delete an specify a product variant
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="apiClient"></param>

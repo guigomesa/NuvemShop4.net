@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -18,9 +15,7 @@ namespace NuvemShopApi.ExtensionsNuvem
             var builder = new StringBuilder();
 
             foreach (var p in urlParams)
-            {
                 builder.Append($"{p.Item1}={p.Item2}&");
-            }
             return apiClient.GetData<T>($"{BaseResourceWebHook}?{builder}");
         }
 
@@ -38,10 +33,10 @@ namespace NuvemShopApi.ExtensionsNuvem
                 Value = JsonConvert.SerializeObject(model),
                 ContentType = "application/json"
             };
-            return apiClient.PostData<T>($"{BaseResourceWebHook}",parameter);
+            return apiClient.PostData<T>($"{BaseResourceWebHook}", parameter);
         }
 
-        public static T UpdateWebHook<T>(this ClientNuvemShop apiClient, long idWebhook,object model)
+        public static T UpdateWebHook<T>(this ClientNuvemShop apiClient, long idWebhook, object model)
         {
             var parameter = new Parameter
             {
