@@ -4,7 +4,7 @@
     <!--*-->
     <id>$id$</id>
     <!--*-->
-    <version>1.0.0.0</version>
+    <version>1.1.0.0</version>
     <title>
     </title>
     <!--*-->
@@ -19,7 +19,7 @@
     <!--*-->
     <description>$description$</description>
     <!--*-->
-    <releaseNotes>First&amp;#x0020;Release</releaseNotes>
+    <releaseNotes>New&amp;#x0020;release</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>
     </tags>
